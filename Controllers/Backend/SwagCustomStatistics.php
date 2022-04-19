@@ -35,7 +35,7 @@ class Shopware_Controllers_Backend_SwagCustomStatistics extends Shopware_Control
         ]);
     }
     public function exportData($getrequestdata, $data){
-      $filename = 'testexport.csv';
+      $filename = $getrequestdata["type"].'.csv';
       $f = fopen('php://memory', 'w');
       $fields = array('Amount', 'Name'); 
       $delimiter = ";";
@@ -43,8 +43,6 @@ class Shopware_Controllers_Backend_SwagCustomStatistics extends Shopware_Control
 
       foreach($data as $dataset){
         $lineData = array($dataset['amount'], $dataset['name']); 
-        //dump($lineData);
-        //die();
         fputcsv($f, $lineData, $delimiter); 
       }
       fseek($f, 0); 
